@@ -3,6 +3,7 @@ package com.dbk.puzzle;
 public class Puzzle1 {
 
 	/**
+	 * hello world
 	 * @param args
 	 */
 	public static void main(String[] args) {
