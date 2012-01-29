@@ -19,15 +19,6 @@ public class Puzzle29 {
 	public static Map<Integer, int[]> factors = new HashMap<Integer, int[]>();
 	
 	public static void main(String args[]){
-		//init
-//		for(int i = 0 ; i < board.length; i++){
-//			board[i][0] = false;
-//			board[i][1] = false;
-//		}
-//		for(int i = 0 ; i< board[0].length; i++){
-//			board[0][i] = false;
-//			board[1][i] = false;
-//		}
 		for(int i = 2; i< board.length; i++){
 			for(int j = 2; j< board[0].length; j++){
 				board[i][j] = true;
@@ -43,7 +34,6 @@ public class Puzzle29 {
 			for(int b = 2; b < board[0].length; b++){
 				int[] facts = factors.get(b);
 				if(facts == null) continue;
-//				if(pow(a,b)> bound) continue;
 				if(!board[a][b]) continue;
 				for(int i: facts){
 					int big = pow(a,i);
@@ -57,11 +47,20 @@ public class Puzzle29 {
 		}
 		
 		//counting , still left condition of a^b = c^d, where a= x^y, c = x^z, thus y*b = z*d;
-		// this condition will include 2^2 2^3 and 3^2 3^3
+		// this condition will include 2^2 2^3 and 3^2 3^3, etc.
 		int base = 2;
-		count = minusCross(base, count);
+		count = minusCross(base, count,2,3);
+		count = minusCross(base, count,2,5);
+		count = minusCross(base, count,3,5);
+		count = minusCross(base, count,5,6);
+		count = minusCross(base, count,4,5);
+		count = minusCross(base, count,3,4);
+		count = minusCross(base, count,4,6);
 		base = 3;
-		count = minusCross(base, count);
+		count = minusCross(base, count,2,3);
+		count = minusCross(base, count,3,4);
+		base = 4;
+		count = minusCross(base, count,2,3);
 		print();
 		System.out.println(count);
 		
@@ -72,12 +71,19 @@ public class Puzzle29 {
 	 * @param base
 	 * @return count
 	 */
-	public static int minusCross(int base, int count){
-		int sqr = base* base;
-		int cub = base* base * base;
-		for(int i = 1;i <= 33; i++){
-			if(!board[sqr][3*i] || !board[cub][2*i]) continue;
-			board[cub][2*i] = false;
+	public static int minusCross(int base, int count, int time1, int time2){
+		int sqr=1,cub = 1;
+		for(int i = 0; i < time1; i++){
+			sqr *= base;
+		}
+		for(int i = 0; i< time2; i++){
+			cub *= base;
+		}
+		int boarder = bound/ ((time1>time2)?time1:time2);
+		for(int i = 1;i <= boarder; i++){
+			
+			if(!board[sqr][time2*i] || !board[cub][time1*i]) continue;
+			board[cub][time1*i] = false;
 			count--;
 		}
 		return count;
