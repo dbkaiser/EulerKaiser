@@ -19,37 +19,102 @@ public class Puzzle29 {
 	public static Map<Integer, int[]> factors = new HashMap<Integer, int[]>();
 	
 	public static void main(String args[]){
-		
 		//init
-		for(int i = 0 ; i < board.length; i++){
-			board[i][0] = false;
-			board[i][1] = false;
-		}
-		for(int i = 0 ; i< board[0].length; i++){
-			board[0][i] = false;
-			board[1][i] = false;
-		}
+//		for(int i = 0 ; i < board.length; i++){
+//			board[i][0] = false;
+//			board[i][1] = false;
+//		}
+//		for(int i = 0 ; i< board[0].length; i++){
+//			board[0][i] = false;
+//			board[1][i] = false;
+//		}
 		for(int i = 2; i< board.length; i++){
-			for(int j = 2; i< board[0].length; i++){
+			for(int j = 2; j< board[0].length; j++){
 				board[i][j] = true;
 			}
 		}
-		
 		for(int i = 2 ; i < board[0].length; i++){
 			factors.put(i, findFactors(i));
 		}
 		
-		//counting;
+		//counting remove condition of a^b = a^xt, where a,b,x,t are all integers;
 		int count = (bound-1)*(bound-1);
 		for(int a = 2; a <= Math.sqrt((double)board.length) + 1; a++){
 			for(int b = 2; b < board[0].length; b++){
-				if(factors.get(b) == null) continue;
-				//if()
+				int[] facts = factors.get(b);
+				if(facts == null) continue;
+//				if(pow(a,b)> bound) continue;
+				if(!board[a][b]) continue;
+				for(int i: facts){
+					int big = pow(a,i);
+					if(big > bound) continue;
+					if(big < 0) {
+						continue;
+					}
+					if(board[(int)big][b/i]){count--; board[(int) big][b/i] = false;}
+				}
 			}
 		}
-
+		
+		//counting , still left condition of a^b = c^d, where a= x^y, c = x^z, thus y*b = z*d;
+		// this condition will include 2^2 2^3 and 3^2 3^3
+		int base = 2;
+		count = minusCross(base, count);
+		base = 3;
+		count = minusCross(base, count);
+		print();
+		System.out.println(count);
+		
 	}
 	
+	/**
+	 * 
+	 * @param base
+	 * @return count
+	 */
+	public static int minusCross(int base, int count){
+		int sqr = base* base;
+		int cub = base* base * base;
+		for(int i = 1;i <= 33; i++){
+			if(!board[sqr][3*i] || !board[cub][2*i]) continue;
+			board[cub][2*i] = false;
+			count--;
+		}
+		return count;
+	}
+	
+	//b times a
+	public static int pow(int a, int b){
+		int i = a;
+		for(int j = 1 ; j< b; j ++){
+			i *= a;
+		}
+		return i;
+	}
+	
+	public static void print(){
+		int innerCount =0;
+		for(int i = 1; i <= bound; i++){
+			System.out.print(i + "\t");
+		}
+		System.out.println();
+		for(int i = 2; i<= bound; i++){
+			System.out.print(i + "\t");
+			int lineCount = 0;
+			for(int j = 2; j<= bound; j++){
+				System.out.print(board[i][j]+"\t");
+				if(board[i][j]) {innerCount++;
+					lineCount++;
+				}
+				
+			}
+			System.out.print(lineCount);
+			System.out.println();
+			
+		}
+		System.out.println(innerCount);
+		System.out.println();
+	}
 	/**
 	 * find all factors of the number
 	 * @param number integer from 2 to 100;
