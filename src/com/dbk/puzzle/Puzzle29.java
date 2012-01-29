@@ -10,6 +10,7 @@ import java.util.Map;
  * 
  * @author edogboo
  *
+ * the following solution is stupid, use double as the number count. and use set to store, then count size.
  */
 public class Puzzle29 {
 	
