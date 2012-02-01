@@ -3,6 +3,10 @@ package com.dbk.puzzle;
 /**
  * 
  * @author edogboo
+ * 
+ * clearer way: count all factorial at the very beginning!!
+ *  from 1! to 10!
+ *  
  *
  */
 public class Puzzle34 {
@@ -28,3 +32,26 @@ public class Puzzle34 {
 		return m<=1?1:m*jc(m-1);
 	}
 }
+
+//following is a cleverer solution // in python:
+
+//F = [1]
+//for x in range(1, 10):
+//  F.append(F[-1] * x)
+//
+//def special(x):
+//  global F
+//  s = 0
+//  t = x
+//  while t > 0:
+//    s += F[t%10]
+//    t //= 10
+//
+//  return s == x
+//
+//sol = 0
+//for x in range(3, 10000000):
+//  if special(x):
+//    sol += x
+//
+//print sol 
