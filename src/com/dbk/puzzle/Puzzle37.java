@@ -11,10 +11,12 @@ public class Puzzle37 {
 	
 	public static void main(String args[]){
 		countPrime();
-		for(int i = 3; i< limit; i++){
+		int count = 0;
+		for(int i = 10; i< limit; i++){
 			int length = (int)Math.pow(10, (int)Math.log10(i));
-			if(isTruable(i, true, length) && isTruable(i, false, length)) System.out.println(i);
+			if(isTruable(i, true, length) && isTruable(i, false, length)) count += i;
 		}
+		System.out.println(count);
 	}
 	
 	public static void countPrime(){
