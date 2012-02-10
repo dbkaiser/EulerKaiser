@@ -5,15 +5,15 @@ def readfile():
 	f=file('../test.txt');
 	while True:
 		str = f.readline();
-		print len(str);
+ 		print ord(str[len(str)-1]);
 		if len(str)==0 :
 			break;
 
 	f.close();
 
-readfile();
-f= file('../num13.txt');
-s = f.readline();
-print s;
-f.close();
+def isPrime(num):
+	for x in range (1,num/2):
+		if num%x==0: return False;
+	return True;
 
+print(isPrime(33))
