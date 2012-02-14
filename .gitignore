@@ -1,0 +1,8 @@
+*~
+# project file from eclispe
+bin
+.project
+.classpath
+.settings
+# class files
+
