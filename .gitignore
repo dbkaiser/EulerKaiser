@@ -1,8 +1,19 @@
-*~
 # project file from eclispe
 bin
 .project
 .classpath
 .settings
 # class files
+
+# python compile files
+
+
+# vi outputfiles
+*~
+
+# java compile file
+.class
+
+# erlang compile files
+.beam
 
