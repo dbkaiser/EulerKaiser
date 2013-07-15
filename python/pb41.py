@@ -18,13 +18,30 @@ def storePrime(bound):
     return primes
 
 def listToDigit(lists):
-    count=0;
-    for i in lists:
-        count = count * 10 + i;
-    return count;
+    return int(''.join(str(u) for u in lists))
 
 
+def isPrime(num):
+    """ Judge if the num is prime"""
+    if num==2 or num==3 : return True
+    if num%2==0 or num%3==0 : return False
+    root=int(math.ceil(math.sqrt(num+1)))
+    print root
+    for i in range(3,root+1, 2):
+        print i,"wehi"
+        if num%i==0 : return False
+    return True
 
+lists=permutations(range(9,0,-1))
+for num in lists:
+    thedi=listToDigit(num)
+    if isPrime(thedi): 
+        print thedi
+        print "auv"
+        print num
+        break
+
+    
 
 
 
