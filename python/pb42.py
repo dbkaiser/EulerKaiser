@@ -24,7 +24,7 @@ def checkTriangle(num):
     
 countTriangles()
 print countSum("ASDI")
-fileint=file("../names22.txt",'r');
+fileint=file("../words42.txt",'r');
 content=fileint.read()
 purge=content.replace('"','')
 lists=purge.split(',')
@@ -32,7 +32,8 @@ sum=0
 for li in lists:
     sisum=countSum(li)
     if checkTriangle(sisum):
-        sum+=sisum
+        sum+=1
 
 print sum
+
 
