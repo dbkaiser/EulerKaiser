@@ -1,5 +1,5 @@
 #!/usr/bin/python
-
+import time
 trilist=[];
 
 def countTriangles():
@@ -21,7 +21,8 @@ def countSum(word):
 def checkTriangle(num):
     global trilist
     return trilist[num]==1
-    
+
+tSt=time.time()    
 countTriangles()
 print countSum("ASDI")
 fileint=file("../words42.txt",'r');
@@ -33,7 +34,7 @@ for li in lists:
     sisum=countSum(li)
     if checkTriangle(sisum):
         sum+=1
-
+print time.time()-tSt
 print sum
 
 

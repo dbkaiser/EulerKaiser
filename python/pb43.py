@@ -16,3 +16,9 @@ def checkValid(numlist):
 def listToDigit(list):
     return int(''.join(str(u) for u in list))
 
+lists=permutations(range(0,10))
+sum=0
+for i in lists:
+    if checkValid(i):
+        sum+=listToDigit(i)
+print sum
